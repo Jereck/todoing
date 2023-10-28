@@ -3,7 +3,7 @@
 import React from 'react'
 import { useRouter } from 'next/navigation';
 import { api } from '~/trpc/react'
-import { Todo } from '~/server/db/schema';
+import { type Todo } from '~/server/db/schema';
 
 export function TodoItem({ todo }: { todo: Todo }) {
   const router = useRouter();
