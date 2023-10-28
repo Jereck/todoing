@@ -6,13 +6,6 @@ import { todos } from "~/server/db/schema";
 
 export const todosRouter = createTRPCRouter({
 
-  hello: publicProcedure.query(({ ctx }) => {
-    console.log("user: ", ctx.auth?.userId)
-    return {
-      greeting: `hello! ${ctx.auth?.user}`
-    }
-  }),
-
   getAllTodos: publicProcedure.query(({ ctx }) => {
     return ctx.db.query.todos.findMany({
       limit: 100,
