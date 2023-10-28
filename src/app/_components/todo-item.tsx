@@ -20,23 +20,30 @@ export function TodoItem({ todo }: { todo: Todo }) {
 
   return (
     <div key={todo.id} className="flex flex-row w-full border justify-between p-2 my-2 rounded">
-      <input 
-        type="checkbox"
-        checked={todo.done}
-        onChange={() => {
-          setDoneMutate({
-            todoId: todo.id,
-            done: todo.done ? false : true
-          })
-        }}
-      />
-      <p>{ todo.todo }</p>
-      <button
-        className="text-red-500"
-        onClick={() => {
-          mutate({ todoId: todo.id })
-        }}
-      >Delete</button>
+      <div className="flex flex-row space-x-2">
+        <input 
+          type="checkbox"
+          checked={todo.done}
+          onChange={() => {
+            setDoneMutate({
+              todoId: todo.id,
+              done: todo.done ? false : true
+            })
+          }}
+        />
+        <div>
+          { todo.todo }
+        </div>
+      </div>
+
+      <div>
+        <button
+          className="text-red-500"
+          onClick={() => {
+            mutate({ todoId: todo.id })
+          }}
+        >Delete</button>
+      </div>
     </div>
   )
 }

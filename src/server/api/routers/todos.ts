@@ -5,6 +5,14 @@ import { createTRPCRouter, publicProcedure } from "../trpc";
 import { todos } from "~/server/db/schema";
 
 export const todosRouter = createTRPCRouter({
+
+  hello: publicProcedure.query(({ ctx }) => {
+    console.log("user: ", ctx.auth?.userId)
+    return {
+      greeting: `hello! ${ctx.auth?.user}`
+    }
+  }),
+
   getAllTodos: publicProcedure.query(({ ctx }) => {
     return ctx.db.query.todos.findMany({
       limit: 100,
@@ -14,7 +22,8 @@ export const todosRouter = createTRPCRouter({
 
   createTodo: publicProcedure.input(z.object({ todo: z.string() })).mutation(async ({ ctx, input}) => {
     const newTodo = await ctx.db.insert(todos).values({
-      todo: input.todo
+      todo: input.todo,
+      userId: ctx.auth.userId
     })
 
     return newTodo

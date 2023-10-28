@@ -29,6 +29,7 @@ export const todos = mysqlTable(
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
     updatedAt: timestamp("updatedAt").onUpdateNow(),
+    userId: varchar("user_id", { length: 256 })
   },
   (table) => ({
     todoIndex: index("todo_idx").on(table.todo)
