@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { SyntheticEvent, useState } from "react";
+import { type SyntheticEvent, useState } from "react";
 
 import { api } from "~/trpc/react";
 
@@ -17,7 +17,7 @@ export function CreateTodo() {
     },
   });
 
-  const handleSubmit = async (e: SyntheticEvent) => {
+  const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault()
     if (todo.trim() === "") {
       setError("Todo cannot be blank");
