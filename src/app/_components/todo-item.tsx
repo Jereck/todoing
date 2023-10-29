@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react'
+import React, { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation';
 import { api } from '~/trpc/react'
 import { type Todo } from '~/server/db/schema';
@@ -19,7 +19,10 @@ export function TodoItem({ todo }: { todo: Todo }) {
   })
 
   return (
-    <div key={todo.id} className="flex flex-row w-full border justify-between p-2 my-2 rounded">
+    <div 
+      key={todo.id} 
+      className="flex flex-row w-full border justify-between p-2 my-2 rounded"
+    >
       <div className="flex flex-row space-x-2">
         <input 
           type="checkbox"
@@ -32,7 +35,12 @@ export function TodoItem({ todo }: { todo: Todo }) {
           }}
         />
         <div>
-          { todo.todo }
+          <input 
+            className="bg-transparent"
+            disabled={true}
+            value={todo.todo ? todo.todo : ""}
+          />
+          {/* { todo.todo } */}
         </div>
       </div>
 
