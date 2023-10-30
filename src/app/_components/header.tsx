@@ -1,5 +1,6 @@
 import React from 'react'
 import { UserButton } from '@clerk/nextjs'
+import { ThemeSwitcher } from './theme-switcher'
 
 const Header = () => {
   return (
@@ -13,6 +14,7 @@ const Header = () => {
 
       </div>
       <div className="flex items-center">
+        <ThemeSwitcher />
         <UserButton 
           appearance={{
             elements: {
