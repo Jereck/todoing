@@ -43,7 +43,7 @@ function TodoList() {
       </div>
       <CreateTodo refetch={refetch} />
 
-      <Tabs className="w-full mt-2">
+      <Tabs className="w-full mt-4 justify-center">
         <Tab key="incomplete" title="Incomplete">
           { incompleteTodos?.map(( todo ) => (
             <TodoItem key={todo.id} todo={todo} setDoneMutate={setDoneMutate} deleteMutate={deleteMutate} />
