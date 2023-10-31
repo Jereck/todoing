@@ -14,7 +14,7 @@ function TodoList() {
       console.log("Delete Error: ", error.message)
     },
     onSuccess: () => {
-      refetch()
+      void refetch()
     }
   })
   const { mutate: setDoneMutate } = api.todos.setDone.useMutation({
@@ -22,13 +22,13 @@ function TodoList() {
       console.log("SetDone Error: ", error.message)
     },
     onSuccess: () => {
-      refetch()
+      void refetch()
     }
   })
 
   const { mutate: clearCompleted } = api.todos.clearCompleted.useMutation({
     onSuccess: () => {
-      refetch()
+      void refetch()
     }
   })
 
