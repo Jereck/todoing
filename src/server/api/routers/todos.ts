@@ -30,5 +30,10 @@ export const todosRouter = createTRPCRouter({
   setDone: publicProcedure.input(z.object({ todoId: z.number(), done: z.boolean() })).mutation( async ({ ctx, input }) => {
     return await ctx.db.update(todos).set({ done: input.done })
       .where(eq(todos.id, input.todoId))
+  }),
+
+  clearCompleted: publicProcedure.mutation(async ({ ctx }) => {
+    await ctx.db.delete(todos).where(eq(todos.done, true));
+    return true
   })
 })

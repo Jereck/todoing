@@ -6,15 +6,17 @@ import { type SyntheticEvent, useState } from "react";
 
 import { api } from "~/trpc/react";
 
-export function CreateTodo() {
+type RefetchFunction = () => void;
+
+export function CreateTodo({ refetch }: { refetch: RefetchFunction }) {
   const router = useRouter();
   const [todo, setTodo] = useState("");
   const [error, setError] = useState("");
 
   const createTodo = api.todos.createTodo.useMutation({
     onSuccess: () => {
-      router.refresh();
       setTodo("");
+      refetch();
     },
   });
 
