@@ -23,7 +23,7 @@ export function TodoItem({ todo }: { todo: Todo }) {
   return (
     <Card 
       key={todo.id}
-      className="my-2"
+      className="my-2 hover:scale-105"
     >
       <CardBody className="flex flex-row justify-between items-center p-3">
         <div className="flex gap-2">
