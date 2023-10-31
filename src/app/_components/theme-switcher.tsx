@@ -17,12 +17,17 @@ export function ThemeSwitcher() {
 
   return (
     <div>
-      <Button variant="light" isIconOnly onClick={() => setTheme('light')}>
-        <Sun />
+      <Button 
+        className="mr-2"
+        variant="light" 
+        isIconOnly 
+        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      >
+        <Sun className={`h-6 w-6 transition-all ${theme === "dark" ? "-rotate-90 scale-0" : "rotate-0 scale-100"}`}  />
+        <Moon className={`absolute h-6 w-6 transition-all ${theme === "dark" ? "rotate-0 scale-100" : "rotate-90 scale-0"}`} />
+        <span className="sr-only">Toggle Theme</span>
       </Button>
-      <Button variant="light" isIconOnly onClick={() => setTheme('dark')}>
-        <Moon />
-      </Button>
+
     </div>
   )
 }

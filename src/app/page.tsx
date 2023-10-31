@@ -1,6 +1,8 @@
 import { api } from "~/trpc/server";
 import { CreateTodo } from "./_components/create-todo";
 import TodoItem from "./_components/todo-item";
+import moment from 'moment'
+
 
 export default function Home() {
   return (
@@ -15,8 +17,14 @@ export default function Home() {
 async function TodoList() {
   const allTodos = await api.todos.getAllTodos.query();
 
+  const inCompleteTodos = allTodos.filter(todo => !todo.done)
+
   return (
-    <div className="w-full max-w-md">
+    <div className="w-full max-w-lg">
+      <div className="mb-4">
+        <h1 className="text-2xl">{ moment(Date.now()).format('dddd, MMM Do')}</h1>
+        <p className="text-blue-500">{ inCompleteTodos.length } active tasks</p>
+      </div>
       <CreateTodo />
       { allTodos.length > 0 ? (
         allTodos.map((todo) => (

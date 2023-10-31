@@ -4,6 +4,8 @@ import React from 'react'
 import { useRouter } from 'next/navigation';
 import { api } from '~/trpc/react'
 import { type Todo } from '~/server/db/schema';
+import { Button, Card, CardBody } from '@nextui-org/react';
+import { Trash } from 'lucide-react';
 
 export function TodoItem({ todo }: { todo: Todo }) {
   const router = useRouter();
@@ -19,40 +21,38 @@ export function TodoItem({ todo }: { todo: Todo }) {
   })
 
   return (
-    <div 
-      key={todo.id} 
-      className="flex flex-row w-full border justify-between p-2 my-2 rounded"
+    <Card 
+      key={todo.id}
+      className="my-2"
     >
-      <div className="flex flex-row space-x-2">
-        <input 
-          type="checkbox"
-          checked={todo.done}
-          onChange={() => {
-            setDoneMutate({
+      <CardBody className="flex flex-row justify-between items-center p-3">
+        <div className="flex gap-2">
+          <span 
+            className={`${todo.done === true ? "text-green-500 strike" : ""} cursor-pointer`}
+            onClick={() =>              
+              setDoneMutate({
               todoId: todo.id,
               done: todo.done ? false : true
-            })
-          }}
-        />
-        <div>
-          <input 
-            className="bg-transparent"
-            disabled={true}
-            value={todo.todo ? todo.todo : ""}
-          />
-          {/* { todo.todo } */}
+            })}
+          >
+            { todo.todo }
+          </span>
         </div>
-      </div>
 
-      <div>
-        <button
-          className="text-red-500"
-          onClick={() => {
-            mutate({ todoId: todo.id })
-          }}
-        >Delete</button>
-      </div>
-    </div>
+        <div>
+          <Button
+            isIconOnly
+            variant="light"
+            className="text-red-500"
+            onClick={() => {
+              mutate({ todoId: todo.id })
+            }}
+          >
+            <Trash />
+          </Button>
+        </div>
+      </CardBody>
+    </Card>
   )
 }
 

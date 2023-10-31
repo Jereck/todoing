@@ -1,17 +1,12 @@
 import "~/styles/globals.css";
 
-import { Inter } from "next/font/google";
+import { GeistSans } from 'geist/font'
 import { headers } from "next/headers";
 
 import { TRPCReactProvider } from "~/trpc/react";
 import Header from "./_components/header";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Providers } from "./_components/providers";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
 
 export const metadata = {
   title: "Todoing",
@@ -26,8 +21,8 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body className={`font-sans ${inter.variable}`}>
+      <html lang="en" className={`${GeistSans.variable}`} suppressHydrationWarning>
+        <body>
           <Providers>
             <Header />
             <TRPCReactProvider headers={headers()}>{children}</TRPCReactProvider>

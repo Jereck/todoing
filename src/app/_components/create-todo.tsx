@@ -1,5 +1,6 @@
 "use client";
 
+import { Button, Input } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { type SyntheticEvent, useState } from "react";
 
@@ -30,9 +31,11 @@ export function CreateTodo() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-2"
+      className="flex flex-row items-center gap-2"
     >
-      <input
+      <Input
+        variant="bordered"
+        size="lg"
         type="text"
         placeholder="Todo"
         value={todo}
@@ -40,16 +43,16 @@ export function CreateTodo() {
           setTodo(e.target.value)
           setError("");
         }}
-        className="w-full border border-black px-4 py-2 text-black rounded"
       />
       {error && <div className="text-red-600">{error}</div>}
-      <button
+      <Button
         type="submit"
-        className="rounded bg-green-400 py-2 font-semibold transition hover:bg-green-700 text-white"
+        size="lg"
+        className="bg-green-400 py-2 font-semibold transition hover:bg-green-700 text-white"
         disabled={createTodo.isLoading}
       >
-        {createTodo.isLoading ? "Submitting..." : "Submit"}
-      </button>
+        { createTodo.isLoading ? "Submitting..." : "Submit" }
+      </Button>
     </form>
   );
 }
