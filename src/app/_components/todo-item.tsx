@@ -7,18 +7,13 @@ import { type Todo } from '~/server/db/schema';
 import { Button, Card, CardBody } from '@nextui-org/react';
 import { Trash } from 'lucide-react';
 
-export function TodoItem({ todo }: { todo: Todo }) {
-  const router = useRouter();
-  const { mutate } = api.todos.deleteTodo.useMutation({
-    onSuccess: () => {
-      router.refresh()
-    }
-  })
-  const { mutate: setDoneMutate } = api.todos.setDone.useMutation({
-    onSuccess: () => {
-      router.refresh()
-    }
-  })
+interface TodoItemProps {
+  todo: Todo;
+  setDoneMutate: (params: { todoId: number; done: boolean }) => void;
+  deleteMutate: (params: { todoId: number }) => void;
+}
+
+export function TodoItem({ todo, setDoneMutate, deleteMutate }: TodoItemProps) {
 
   return (
     <Card 
@@ -31,9 +26,9 @@ export function TodoItem({ todo }: { todo: Todo }) {
             className={`${todo.done === true ? "text-green-500 strike" : ""} cursor-pointer`}
             onClick={() =>              
               setDoneMutate({
-              todoId: todo.id,
-              done: todo.done ? false : true
-            })}
+                todoId: todo.id,
+                done: todo.done ? false : true
+              })}
           >
             { todo.todo }
           </span>
@@ -45,7 +40,7 @@ export function TodoItem({ todo }: { todo: Todo }) {
             variant="light"
             className="text-red-500"
             onClick={() => {
-              mutate({ todoId: todo.id })
+              deleteMutate({ todoId: todo.id })
             }}
           >
             <Trash />
