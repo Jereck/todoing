@@ -1,7 +1,6 @@
 "use client";
 
 import { Button, Input } from "@nextui-org/react";
-import { useRouter } from "next/navigation";
 import { type SyntheticEvent, useState } from "react";
 
 import { api } from "~/trpc/react";
@@ -9,7 +8,6 @@ import { api } from "~/trpc/react";
 type RefetchFunction = () => void;
 
 export function CreateTodo({ refetch }: { refetch: RefetchFunction }) {
-  const router = useRouter();
   const [todo, setTodo] = useState("");
   const [error, setError] = useState("");
 
